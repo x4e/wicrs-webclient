@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>WICRS web client</title>
+	<link href="/style/index.css" rel="stylesheet" />
+</head>
+
+<body>
+	
+	
+	
+	<div class="modal modal-open" id="connect-modal">
+		<div class="modal-content">
+			<label for="hostname">Host Name:</label><br>
+			<input type="text" id="connect-hostname-inp" name="hostname" value="chat.binclub.dev" />
+			
+			<br>
+			
+			<label for="pgp-passphrase">PGP Passphrase:</label><br>
+			<input type="password" name="pgp-passphrase" id="pgp-passphrase-inp"/><br><br>
+			
+			To import key from PGP run this then paste selection into the textbox:
+			<pre>echo "email='x4e_x4e@protonmail.com'; gpg --armor --export-secret-keys $email | xclip" | sh</pre>
+			<div style="display: grid; grid-template-columns: 1fr 1fr;">
+				<div>
+					<label for="pgp-key">PGP Key:</label><br>
+					<textarea id="connect-pgp-inp" name="pgp-key" cols="65" rows="20" placeholder="-----BEGIN PGP PUBLIC KEY BLOCK-----
+...
+-----END PGP PUBLIC KEY BLOCK-----
+-----BEGIN PGP PRIVATE KEY BLOCK-----
+...
+-----END PGP PRIVATE KEY BLOCK-----"></textarea>		
+				</div>
+				<div>
+					<label for="pgp-name">Name:</label><br>
+					<input type="text" name="pgp-name" id="pgp-name-inp" /><br>
+					<label for="pgp-email">Email Address:</label><br>
+					<input type="email" name="pgp-email" id="pgp-email-inp" /><br>
+					<button id="generate-btn" onclick="window.pgpGenerate()">Generate Random Key</button>
+					<p>Make sure to save the generated key somewhere!</p>
+				</div>
+			</div>
+			
+			<br>
+			
+			<button id="connect-btn" onclick="window.wicrsConnect()">Connect</button>
+		</div>
+	</div>
+	
+	<div class="modal modal-closable" id="modal-error">
+		<div class="modal-content">
+			<h1>Error</h1>
+			<p>
+				<pre id="modal-error-text">Unknown error occured</pre>
+			</p>
+		</div>
+	</div>
+	
+	<script src="/script/openpgp.js"></script>
+	<script src="/script/conn.js"></script>
+	<script src="/script/index.js"></script>
+</body>
+
+</html>
